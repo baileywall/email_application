@@ -15,7 +15,7 @@ NOTE that because of strict authentication requirements of send addresses, the e
 
 I used Node.js because it seemed like the most straightforward way to get a server up and running, and to make it easily usable on other machines. 
 
-Most of my previous experience is in Java, so I used the Express framework because it was recommended in this Node.js resource: https://codeburst.io/the-only-nodejs-introduction-youll-ever-need-d969a47ef219. It made receiving the POST requests fairly uncomplicated, and makes setting up the server a little cleaner by doing the routing-related error handling.
+Most of my previous experience is in Java, so I used the Express framework because it was recommended in [this Node.js resource](https://codeburst.io/the-only-nodejs-introduction-youll-ever-need-d969a47ef219). It made receiving the POST requests fairly uncomplicated, and makes setting up the server a little cleaner by doing the routing-related error handling.
 
 I used the [body-parser](https://github.com/expressjs/body-parser) library to make it possible for me to parse the JSON data in the post requests.
 
