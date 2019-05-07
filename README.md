@@ -4,7 +4,7 @@
 
 The only thing that needs to be installed for the application to work is [Node.js](https://nodejs.org/en/download/).
 
-In order for the application to work, you must set the respective API tokens sent to you by email in `config.json`.
+In order for the application to work, you must set the respective API tokens sent to you by email in `config/config.json`.
 
 Once Node is installed, the application can be started by running 
 `node server.js` on the command line.
@@ -31,7 +31,7 @@ I tried to set up a MailGun account, but my domain was blacklisted and Customer 
 
 ### changing the client
 
-To change the client from Mandrill to SendGrid, change `backup_email_service` in config/config.json to be `true` and restart the application with `node server.js`.
+To change the client from Mandrill to SendGrid, change `backup_email_service` in `config/config.json` to be `true` and restart the application with `node server.js`.
 
 ## testing
 

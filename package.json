@@ -1,5 +1,5 @@
 {
-  "name": "email_app",
+  "name": "email_application",
   "version": "1.0.0",
   "description": "a simple app to send emails from HTTP requests",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/baileywall/email_app.git"
+    "url": "git+https://github.com/baileywall/email_application.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/baileywall/email_app/issues"
+    "url": "https://github.com/baileywall/email_application/issues"
   },
-  "homepage": "https://github.com/baileywall/email_app#readme",
+  "homepage": "https://github.com/baileywall/email_application#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.19.0",
