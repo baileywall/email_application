@@ -6,18 +6,19 @@ The only thing that needs to be installed for the application to work is [Node.j
 
 In order for the application to work, you must set the respective API tokens sent to you by email in `config/config.json`.
 
-Once Node is installed, the application can be started by running 
-`node server.js` on the command line.
+Once Node is installed, the application can be started by running `node server.js` on the command line.
 
-NOTE that because of strict authentication requirements of send addresses, the emails to either client will only send if from field is `bailey@waffles.biz` (a custom domain I created for this exercise).
+It will then receive HTTP POST requests sent to `localhost:3000/email`.
+
+NOTE that because of strict authentication requirements for send addresses, the emails to either client will only send if from field is `bailey@waffles.biz` (a custom domain I created for this exercise).
 
 ## design decisions
 
-I used Node.js because it seemed like the most straightforward way to get a server up and running, and to make it easily usable on other machines. 
+I used Node.js because it seemed like the most straightforward way to get a server up and running, and to make it easily usable on other machines.
 
-Most of my previous experience is in Java, so I used the Express framework because it was recommended in [this Node.js resource](https://codeburst.io/the-only-nodejs-introduction-youll-ever-need-d969a47ef219). It made receiving the POST requests fairly uncomplicated, and makes setting up the server a little cleaner by doing the routing-related error handling.
+Most of my previous experience is in Java, so I relied heavily on [this Node.js resource](https://codeburst.io/the-only-nodejs-introduction-youll-ever-need-d969a47ef219) which recommended using the Express framework. It made receiving the POST requests fairly uncomplicated, and makes setting up the server a little cleaner by handling the routing-related error handling.
 
-I used the [body-parser](https://github.com/expressjs/body-parser) library to make it possible for me to parse the JSON data in the post requests.
+I used the [body-parser](https://github.com/expressjs/body-parser) library to parse the JSON data in the post requests.
 
 I used [striptags](https://www.npmjs.com/package/striptags) to remove the HTML markup from the text of the email.
 
@@ -37,9 +38,9 @@ To change the client from Mandrill to SendGrid, change `backup_email_service` in
 
 I tested this application with this curl command:
 
-```curl --verbose -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"to": "be.stone.wall@gmail.com", "to_name": "Bailey Wall", "from": "bailey@waffles.biz", "from_name": "Bailey Waffles", "subject": "Regarding Waffles", "body": "<h1>YourBill</h1><p>$10</p>"}' localhost:3000/email```
+```curl -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"to": "be.stone.wall@gmail.com", "to_name": "Bailey Wall", "from": "bailey@waffles.biz", "from_name": "Bailey Waffles", "subject": "Regarding Waffles", "body": "<h1>YourBill</h1><p>$10</p>"}' localhost:3000/email```
 
-I also created some test cases to ensure parameter validation is somewhat reasonable:
+I also created some test cases to ensure parameter validation reasonably works (e.g. ensures all parameters are present, and that email addresses are well-formed as `example@domain.xyz`):
 
 ```curl --verbose -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"to": "poorlyformattedemail.com", "to_name": "Mr. Fake", "from": "noreply@mybrightwheel.com", "from_name": "Brightwheel", "subject": "A Message From Brightwheel", "body": "<h1>YourBill</h1><p>$10</p>"}' localhost:3000/email```
 
@@ -49,6 +50,6 @@ I also created some test cases to ensure parameter validation is somewhat reason
 
 ## next steps
 
-If I had more time, the first thing I would want to do is create a better system of creating the POST requests, and a better place to put the API tokens. It would be more ideal if a third or fourth email service could be easily added, as the way the application is structured right now makes it impossible.
+If I had more time, the first thing I would want to do is create a cleaner system of creating the POST requests that I send to the email clients. It would be ideal if a third or fourth email service could be easily added, but the way the application is structured right now makes that impossible.
 
-With even more time, I would want to think more about how the program is waiting on the email services. This is the most obvious place I see the program having an issue with scaling. With a language like Java I think creating threads could be a good solution, but with Node.js I would need to investigate more.
+With even more time, I would want to think more about how the program is waiting on the email services. This is the most obvious place I see the program having an issue with scaling. With a language like Java I think creating threads would be a good solution, but with Node.js I would need to investigate more.

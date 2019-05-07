@@ -21,7 +21,8 @@ server.post('/email',(request,response)=>{
 	var body = request.body.body;
 	if (!params_are_valid(toAddress, toName, fromAddress, fromName, subject, body)) {
 		response.send(
-			'invalid request: ' + toAddress + ' ' + toName + ' ' + fromAddress + ' ' + fromName + ' ' + subject + ' ' + body + '\n');
+			'Invalid request: ' + toAddress + ' ' + toName + ' ' + fromAddress + ' ' + fromName + ' ' + subject + ' ' + body + '\n' +
+			'All fields are required (to, to_name, from, from_name, subject, body) and email addresses must be in the form of example@domain.xyz.\n');
 	}
 	else {
 		body = striptags(body);
@@ -32,7 +33,8 @@ server.post('/email',(request,response)=>{
 			.then((result) => {
 				if (result.status == undefined){
 					response.send('Failed to send email via ' + serviceUsed + ' service: ' 
-						+ result.response.status + ' ' + result.response.statusText + '\n');
+						+ result.response.status + ' ' + result.response.statusText + '\n' 
+						+ 'Ensure the API keys are set in config/config.json.\n');
 				}
 				else if (result.status != 200 && result.status != 202) {
 					response.send('Failed to send email via ' + serviceUsed + ' service: ' + result.status + '\n');
