@@ -1,0 +1,23 @@
+{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "fake@address.com",
+          "name": "Fake Name"
+        }
+      ]
+    }
+  ],
+  "from": {
+    "email": "fake@address.com",
+    "name": "Fake Name"
+  },
+  "subject": "subject",
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "text"
+    }
+  ]
+}

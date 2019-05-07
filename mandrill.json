@@ -1,0 +1,17 @@
+{
+    "key": "",
+    "message": {
+        "html": "",
+        "text": "text",
+        "subject": "subject",
+        "from_email": "fake@address.com",
+        "from_name": "Fake Name",
+        "to": [
+            {
+                "email": "fake@address.com",
+                "name": "Fake Name",
+                "type": "to"
+            }
+        ]
+    }
+}
