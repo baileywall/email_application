@@ -2,7 +2,7 @@
 
 ## installation instructions
 
-The only thing that needs to be installed for the application to work is Node.js.
+The only thing that needs to be installed for the application to work is [Node.js](https://nodejs.org/en/download/).
 
 In order for the application to work, you must set the respective API tokens sent to you by email in `config.json`.
 
