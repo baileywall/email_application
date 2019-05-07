@@ -30,8 +30,12 @@ server.post('/email',(request,response)=>{
 
 		mailer.send_email(toAddress, toName, fromAddress, fromName, subject, body, useBackupService)
 			.then((result) => {
-				if (result.status != 200 && result.status != 202) {
-					response.send('Failed to send email via ' + serviceUsed + ' service.\n');
+				if (result.status == undefined){
+					response.send('Failed to send email via ' + serviceUsed + ' service: ' 
+						+ result.response.status + ' ' + result.response.statusText + '\n');
+				}
+				else if (result.status != 200 && result.status != 202) {
+					response.send('Failed to send email via ' + serviceUsed + ' service: ' + result.status + '\n');
 				}
 				else {
 					response.send('Successfully sent email to ' + toName + ' (' + toAddress + ') from ' 

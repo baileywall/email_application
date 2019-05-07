@@ -1,10 +1,8 @@
 //mailer.js
 const axios = require('axios'),
 	  mandrillJson = require("./mandrill.json"),
-	  sendgridJson = require("./sendgrid.json");
-
-const MANDRILL_API_KEY = 'xxx';
-const SENDGRID_API_KEY = 'xxx';
+	  sendgridJson = require("./sendgrid.json"),
+	  config = require('./config/config.json');
 
 const MANDRILL_SEND_URL = 'https://mandrillapp.com/api/1.0/messages/send.json';
 const SENDGRID_SEND_URL = 'https://api.sendgrid.com/v3/mail/send';
@@ -24,7 +22,7 @@ module.exports = {
 async function send_email_sendgrid (toAddress, toName, fromAddress, fromName, subject, body) {
 	update_sendgrid_sending_json(toAddress, toName, fromAddress, fromName, subject, body);
 	return await send_email(
-		{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SENDGRID_API_KEY},
+		{'Content-Type': 'application/json', 'Authorization': 'Bearer ' + config.SENDGRID_API_KEY},
 		sendgridJson,
 		SENDGRID_SEND_URL);
 }
@@ -47,7 +45,7 @@ async function send_email_mandrill (toAddress, toName, fromAddress, fromName, su
 
 // update the mail-sending json with the fields given by the user
 function update_mandrill_sending_json (toAddress, toName, fromAddress, fromName, subject, body) {
-	mandrillJson.key = MANDRILL_API_KEY;
+	mandrillJson.key = config.MANDRILL_API_KEY;
 	mandrillJson.message.to[0].email = toAddress;
 	mandrillJson.message.to[0].name = toName;
 	mandrillJson.message.from_email = fromAddress;

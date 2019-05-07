@@ -1,3 +1,5 @@
 {
-	"backup_email_service": false
+	"backup_email_service": false,
+	"MANDRILL_API_KEY": "xxx",
+	"SENDGRID_API_KEY": "xxx"
 }

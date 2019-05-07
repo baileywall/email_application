@@ -4,8 +4,12 @@
 
 The only thing that needs to be installed for the application to work is Node.js.
 
+In order for the application to work, you must set the respective API tokens sent to you by email in `config.json`.
+
 Once Node is installed, the application can be started by running 
 `node server.js` on the command line.
+
+NOTE that because of strict authentication requirements of send addresses, the emails to either client will only send if from field is `bailey@waffles.biz` (a custom domain I created for this exercise).
 
 ## design decisions
 
@@ -13,11 +17,11 @@ I used Node.js because it seemed like the most straightforward way to get a serv
 
 Most of my previous experience is in Java, so I used the Express framework because it was recommended in this Node.js resource: https://codeburst.io/the-only-nodejs-introduction-youll-ever-need-d969a47ef219. It made receiving the POST requests fairly uncomplicated, and makes setting up the server a little cleaner by doing the routing-related error handling.
 
-I used the body-parser library to make it possible for me to parse the JSON data in the post requests.
+I used the [body-parser](https://github.com/expressjs/body-parser) library to make it possible for me to parse the JSON data in the post requests.
 
-I used striptags to remove the HTML markup from the text of the email.
+I used [striptags](https://www.npmjs.com/package/striptags) to remove the HTML markup from the text of the email.
 
-I used the axios library to send the POST requests to the different email clients.
+I used the [axios](https://github.com/axios/axios) library to send the POST requests to the different email clients.
 
 ## email clients
 
@@ -25,13 +29,9 @@ Mandrill is set up to be the default email client.
 
 I tried to set up a MailGun account, but my domain was blacklisted and Customer Support wanted me to prove I was a business so I set up an account with SendGrid instead, which is set up to be the backup client.
 
-NOTE that because of strict authentication requirements of send addresses, the emails will only send if from is `bailey@waffles.biz` (a custom domain I created for this exercise).
-
 ### changing the client
 
 To change the client from Mandrill to SendGrid, change `backup_email_service` in config/config.json to be `true` and restart the application with `node server.js`.
-
-As of last night my SendGrid account was suspended and I was getting 401/Unauthorized responses.
 
 ## testing
 
